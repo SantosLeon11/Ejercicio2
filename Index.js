@@ -1,6 +1,33 @@
 const express = require("express");
 const app = express();
 
+const mysql = require('mysql');
+const connection = mysql.createConnection({
+    host:'localhost',
+    user:'root',
+    password: '',
+    database: 'db_universidad'
+});
+
+connection.connect((err)=>{
+    if (err){
+        console.error('Error de conexion:' ,err);
+        return;
+    }
+    console.log('Conectado a la base de datos')
+});
+
+//Query
+connection.query('SELECT a.ID_Alumno, a.Nombre, a.Apellido,a.Edad, a.Email, c.calificacion, m.materia, carr.carrera FROM tbl_calificaciones c '+
+'INNER JOIN tbl_alumno a ON c.ID_alumno = a.ID_Alumno INNER JOIN tbl_materia m ON c.ID_materia = m.ID_materia INNER JOIN tbl_carrera carr '+
+'ON a.ID_Carrera = carr.ID_Carrera;', (err,rows)=>{
+    if(err){
+        console.error('Error al realizar la consulta:', err);
+        return;
+    }
+    console.log('Resultados:',rows);
+});
+
 //Rutas (Request,Response)
 app.get('/',function(req,res){
     res.send('Inicializo correctamente')
