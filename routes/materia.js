@@ -16,6 +16,19 @@ const getMateria = (request,response) => {
     });
 };
 
+/*aqui va mi primer post*/
+const postMateria = (request,response) => {
+    const {Materia, Cuatrimestre} = request.body;
+    connection.query("INSERT INTO tbl_materia (Materia, Cuatrimestre) VALUES(?,?)",
+    [Materia, Cuatrimestre],
+    (error,results) => {
+        if(error)
+        throw error;
+    response.status(201).json({"Materia agregada": results.affectedRows});
+    });
+};
+app.route("/materia").post(postMateria);
+
 //Ruta
 app.route("/materia").get(getMateria);
 module.exports = app;

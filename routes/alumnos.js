@@ -24,7 +24,7 @@ const postAlumno = (request,response) => {
     (error,results) => {
         if(error)
         throw error;
-    response.status(201).json({"Item añadido correctamente": results.affectedRows});
+    response.status(201).json({"Alumno correctamente agregado": results.affectedRows});
     });
 };
 app.route("/alumnos").post(postAlumno);
