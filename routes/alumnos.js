@@ -16,6 +16,19 @@ const getAlumno = (request,response) => {
     });
 };
 
+/*aqui va mi primer post*/
+const postAlumno = (request,response) => {
+    const {carrera,nombre,apellido,edad,email,estado} = request.body;
+    connection.query("INSERT INTO tbl_alumno (FK_Carrera,Nombre,Apellido,Edad,Email,Estado) VALUES(?,?,?,?,?,?)",
+    [carrera,nombre,apellido,edad,email,estado],
+    (error,results) => {
+        if(error)
+        throw error;
+    response.status(201).json({"Item añadido correctamente": results.affectedRows});
+    });
+};
+app.route("/alumnos").post(postAlumno);
+
 //Ruta
 app.route("/alumnos").get(getAlumno);
 module.exports = app;
