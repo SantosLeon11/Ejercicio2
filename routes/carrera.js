@@ -8,7 +8,7 @@ const {connection} = require("../config/config.db");
 const getCarreraId = (request,response)=>{
     const id = request.params.id;
     //console.log(id); return false;
-    connection.query("SELECT al.ID_Alumno, al.Nombre, al.Apellido from tbl_alumno as al WHERE al.FK_Carrera = ?",
+    connection.query("SELECT al.ID_Alumno, al.Nombre, al.Apellido, al.Email from tbl_alumno as al WHERE al.FK_Carrera = ?",
     [id],
     (error, results) => {
         if(error)
