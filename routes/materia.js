@@ -12,9 +12,9 @@ const getMateria = (request,response) => {
         if(error)
         throw error;
     response.status(200).json(results);
-
     });
 };
+app.route("/materia").get(getMateria);
 
 /*Post de materia en base de datos*/
 const postMateria = (request,response) => {
@@ -43,6 +43,4 @@ const delMateria = (request,response)=>{
 };
 app.route("/materia/:id").delete(delMateria);
 
-//Ruta
-app.route("/materia").get(getMateria);
 module.exports = app;
