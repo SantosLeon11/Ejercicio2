@@ -5,6 +5,16 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const {connection} = require("../config/config.db");
+const getCarrera = (request,response) => {
+    connection.query("SELECT * FROM tbl_carrera",
+    (error,results)=>{
+        if(error)
+        throw error;
+    response.status(200).json(results);
+    });
+};
+app.route("/carrera").get(getCarrera);
+
 const getCarreraId = (request,response)=>{
     const id = request.params.id;
     //console.log(id); return false;
